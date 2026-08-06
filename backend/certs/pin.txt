@@ -1,0 +1,2 @@
+# SHA-256 fingerprint of certs/server.crt — paste into the Flutter client.
+e2ac83c6c0c4e22c43be87bd2646302fe14a5a3a8cacd46dd314aa735d422a1b

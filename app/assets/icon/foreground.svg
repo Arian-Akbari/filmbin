@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Adaptive-icon foreground: 432×432 with the mark inside the 264 px safe circle,
+  so no launcher mask can clip it. A clapperboard with the play triangle cut out
+  of it — the two ideas the app is about, film and watching, in one shape.
+-->
+<svg xmlns="http://www.w3.org/2000/svg" width="432" height="432" viewBox="0 0 432 432">
+  <defs>
+    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#F2C455"/>
+      <stop offset="1" stop-color="#D79A22"/>
+    </linearGradient>
+    <mask id="cutPlay">
+      <rect width="432" height="432" fill="white"/>
+      <!-- play triangle, punched out of the board -->
+      <path d="M188 208 L188 296 L262 252 Z" fill="black"/>
+    </mask>
+  </defs>
+
+  <g transform="translate(0,6)">
+    <!-- clapper stick, hinged open -->
+    <g transform="rotate(-11 216 168)">
+      <rect x="104" y="128" width="224" height="52" rx="14" fill="url(#gold)"/>
+      <g fill="#12151C">
+        <path d="M126 128 h30 l-22 52 h-30 z"/>
+        <path d="M186 128 h30 l-22 52 h-30 z"/>
+        <path d="M246 128 h30 l-22 52 h-30 z"/>
+        <path d="M306 128 h22 v52 h-44 z"/>
+      </g>
+    </g>
+
+    <!-- board body with the play triangle knocked out -->
+    <rect x="104" y="188" width="224" height="124" rx="20"
+          fill="url(#gold)" mask="url(#cutPlay)"/>
+  </g>
+</svg>

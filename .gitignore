@@ -1,0 +1,35 @@
+# Flutter / Dart
+app/build/
+app/.dart_tool/
+app/.flutter-plugins*
+app/ios/Pods/
+app/android/.gradle/
+app/android/local.properties
+*.iml
+
+# Python
+backend/.venv/
+__pycache__/
+*.pyc
+backend/.pytest_cache/
+
+# Runtime state — never commit
+backend/filmbin.db
+backend/media/avatars/*
+!backend/media/avatars/.gitkeep
+backend/.env
+
+# Private keys. The certificate itself is fine to share; the key is not.
+backend/certs/*.key
+backend/certs/*.srl
+
+# LaTeX build artifacts — the .tex source and the .pdf are what we keep.
+*.aux
+*.log
+*.out
+*.toc
+preview*.png
+
+# Gradle build output inside the android module
+app/android/build/
+app/android/**/build/
