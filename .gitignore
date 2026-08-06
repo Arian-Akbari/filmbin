@@ -34,3 +34,4 @@ preview*.png
 app/android/build/
 app/android/**/build/
 app/android/.kotlin/
+FilmBin-release.apk
