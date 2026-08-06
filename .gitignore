@@ -33,3 +33,4 @@ preview*.png
 # Gradle build output inside the android module
 app/android/build/
 app/android/**/build/
+app/android/.kotlin/
