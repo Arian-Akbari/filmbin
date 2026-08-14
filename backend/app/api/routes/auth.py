@@ -222,6 +222,8 @@ async def forgot_password(
         await db.execute(select(User).where(User.email == payload.email.lower().strip()))
     ).scalar_one_or_none()
     if user is None:
+        # The caller still gets a success message, so the log is the only place this shows up.
+        logger.info("password reset requested for unknown email %s", payload.email)
         return ForgotPasswordResponse(message=message)
 
     token, digest = generate_opaque_token()
@@ -233,7 +235,11 @@ async def forgot_password(
         )
     )
     await db.flush()
-    logger.info("password reset requested for user %s", user.id)
+    if settings.expose_reset_token:
+        # Stands in for the email we do not send yet; never log a live token in production.
+        logger.info("password reset token for %s: %s", user.email, token)
+    else:
+        logger.info("password reset requested for user %s", user.id)
 
     return ForgotPasswordResponse(
         message=message,
