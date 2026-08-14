@@ -28,6 +28,13 @@ Flutter (Android)  →  FastAPI  →  IMDb GraphQL
 
 بقیهٔ تصویرها در `docs/screenshots/`.
 
+**ویدیوها** در `docs/videos/` مخزن گیت هستند (به خاطر محدودیت حجم در بستهٔ ارسالی نیامده‌اند):
+
+- `01-app-features.mp4` — نمایش امکانات اپلیکیشن
+- `02-search-imdb.mp4` — جست‌وجو و دریافت اطلاعات از IMDb
+
+مخزن: <https://github.com/Arian-Akbari/filmbin>
+
 ---
 
 ## راه‌اندازی
