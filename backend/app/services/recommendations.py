@@ -49,6 +49,8 @@ async def recommend(
             result = await imdb_service.search_titles(
                 db,
                 genres=genres,
+                # Sorting by rating with no floor gives the shelf to titles a dozen people rated 10/10.
+                min_votes=10_000,
                 sort_by="USER_RATING",
                 sort_order="DESC",
                 limit=limit + len(known),

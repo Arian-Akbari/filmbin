@@ -161,6 +161,11 @@ async def search_titles(
         constraints["titleTypeConstraint"] = {
             "anyTitleTypeIds": ["tvSeries", "tvMiniSeries"]
         }
+    else:
+        # Section 5.5 searches films and series; single episodes reach the user through their series.
+        constraints["titleTypeConstraint"] = {
+            "anyTitleTypeIds": ["movie", "tvMovie", "tvSeries", "tvMiniSeries"]
+        }
     if genres:
         constraints["genreConstraint"] = {"anyGenreIds": genres}
     if year_from or year_to:
@@ -175,8 +180,6 @@ async def search_titles(
     if min_votes:
         # Keeps "newest" lists free of obscure entries nobody has rated yet.
         constraints["userRatingsConstraint"] = {"ratingsCountRange": {"min": min_votes}}
-    if not constraints:
-        constraints["titleTypeConstraint"] = {"anyTitleTypeIds": ["movie", "tvSeries"]}
 
     variables = {
         "first": limit,

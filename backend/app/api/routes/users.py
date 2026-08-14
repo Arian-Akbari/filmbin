@@ -35,9 +35,25 @@ router = APIRouter(prefix="/users", tags=["کاربران"])
 ALLOWED_IMAGE_TYPES = {"image/png": ".png", "image/jpeg": ".jpg", "image/webp": ".webp"}
 
 
+async def _follow_counts(db: DbSession, user_id: int) -> tuple[int, int]:
+    """Followers and following, the pair every profile shape carries."""
+    followers = (
+        await db.execute(
+            select(func.count()).select_from(Follow).where(Follow.following_id == user_id)
+        )
+    ).scalar_one()
+    following = (
+        await db.execute(
+            select(func.count()).select_from(Follow).where(Follow.follower_id == user_id)
+        )
+    ).scalar_one()
+    return int(followers), int(following)
+
+
 async def _with_summary(db: DbSession, user: User) -> UserOut:
     profile = UserOut.model_validate(user)
     profile.summary = profile.summary.model_copy(update=await profile_summary(db, user.id))
+    profile.followers, profile.following = await _follow_counts(db, user.id)
     return profile
 
 
@@ -165,16 +181,7 @@ async def public_profile(
 ) -> PublicUserOut:
     user = await _load_user(db, username)
 
-    followers = (
-        await db.execute(
-            select(func.count()).select_from(Follow).where(Follow.following_id == user.id)
-        )
-    ).scalar_one()
-    following = (
-        await db.execute(
-            select(func.count()).select_from(Follow).where(Follow.follower_id == user.id)
-        )
-    ).scalar_one()
+    followers, following = await _follow_counts(db, user.id)
 
     is_following = False
     if viewer is not None:

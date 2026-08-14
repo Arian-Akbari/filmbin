@@ -30,6 +30,8 @@ class UserOut(BaseModel):
     is_active: bool = True
     created_at: datetime
     summary: UserSummary = UserSummary()
+    followers: int = 0
+    following: int = 0
 
 
 class PublicUserOut(BaseModel):
